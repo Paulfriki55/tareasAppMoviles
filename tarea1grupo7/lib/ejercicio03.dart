@@ -5,10 +5,10 @@ class Ejercicio03 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ejercicio XX'),
+        title: Text('Ejercicio 03'),
       ),
       body: Center(
-        child: Text('Contenido del Ejercicio XX'),
+        child: Text('Contenido del Ejercicio 03'),
       ),
     );
   }
