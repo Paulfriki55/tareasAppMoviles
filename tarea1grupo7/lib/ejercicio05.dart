@@ -5,20 +5,31 @@ class Ejercicio05 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ejercicio 05',
-            style: TextStyle(color: Colors.white)),
-        backgroundColor: Color(0xFF2E0054),
+        title: Text(
+          'Ejercicio 05',
+          style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
+        ),
+        backgroundColor: Colors.deepPurple, // Color del encabezado
+        centerTitle: true,
+        elevation: 4,
       ),
       body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFF2E0054), Color(0xFF00204A)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
+        color: Colors.white, // Fondo blanco
         child: Center(
-          child: ReajusteForm(),
+          child: SingleChildScrollView(
+            padding: EdgeInsets.all(16.0),
+            child: Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
+              color: Colors.white, // Fondo blanco para la tarjeta
+              child: Padding(
+                padding: EdgeInsets.all(20),
+                child: ReajusteForm(),
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -93,66 +104,86 @@ class _ReajusteFormState extends State<ReajusteForm> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          TextField(
-            controller: _sueldoController,
-            decoration: InputDecoration(
-              labelText: 'Sueldo actual',
-              labelStyle: TextStyle(color: Colors.white),
-              filled: true,
-              fillColor: Colors.white10,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            keyboardType: TextInputType.number,
-            style: TextStyle(color: Colors.white),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          'Reajuste de Sueldos',
+          style: TextStyle(
+            fontSize: 22,
+            fontWeight: FontWeight.bold,
+            color: Colors.teal,
           ),
-          SizedBox(height: 10),
-          TextField(
-            controller: _antiguedadController,
-            decoration: InputDecoration(
-              labelText: 'Antigüedad (años)',
-              labelStyle: TextStyle(color: Colors.white),
-              filled: true,
-              fillColor: Colors.white10,
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            keyboardType: TextInputType.number,
-            style: TextStyle(color: Colors.white),
-          ),
-          SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: _calcularReajuste,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0xFF2E0054), // Replaces 'primary'
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-            child: Text(
-              'Calcular Reajuste',
-              style: TextStyle(fontSize: 16),
+          textAlign: TextAlign.center,
+        ),
+        SizedBox(height: 20),
+        _buildTextField(
+          controller: _sueldoController,
+          label: 'Sueldo actual',
+          icon: Icons.attach_money,
+        ),
+        SizedBox(height: 20),
+        _buildTextField(
+          controller: _antiguedadController,
+          label: 'Antigüedad (años)',
+          icon: Icons.calendar_today,
+        ),
+        SizedBox(height: 30),
+        ElevatedButton.icon(
+          onPressed: _calcularReajuste,
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.deepPurple, // Color del botón
+            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10),
             ),
           ),
-
-          SizedBox(height: 20),
-          FadeTransition(
-            opacity: _fadeAnimation!,
+          icon: Icon(Icons.calculate, color: Colors.white),
+          label: Text(
+            'Calcular Reajuste',
+            style: TextStyle(fontSize: 18, color: Colors.white),
+          ),
+        ),
+        SizedBox(height: 30),
+        FadeTransition(
+          opacity: _fadeAnimation!,
+          child: Center(
             child: Text(
               _resultado,
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Colors.blueGrey,
+              ),
+              textAlign: TextAlign.center,
             ),
           ),
-        ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required IconData icon,
+  }) {
+    return TextField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: label,
+        prefixIcon: Icon(icon, color: Colors.teal),
+        labelStyle: TextStyle(color: Colors.black),
+        filled: true,
+        fillColor: Colors.grey[200],
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+          borderSide: BorderSide.none,
+        ),
       ),
+      keyboardType: TextInputType.number,
+      style: TextStyle(color: Colors.black),
     );
   }
 }

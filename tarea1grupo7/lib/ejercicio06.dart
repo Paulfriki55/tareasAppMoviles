@@ -5,11 +5,19 @@ class Ejercicio06 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ejercicio 06'),
-        backgroundColor: Colors.deepPurple,
+        title: Text(
+          'Ejercicio 06',
+          style: TextStyle(fontWeight: FontWeight.w600, color: Colors.white),
+        ),
+        backgroundColor: Colors.deepPurple, // Color del encabezado
+        centerTitle: true,
+        elevation: 4,
       ),
-      body: Center(
-        child: SueldoForm(),
+      body: Container(
+        color: Colors.white, // Fondo blanco
+        child: Center(
+          child: SueldoForm(),
+        ),
       ),
     );
   }
@@ -51,11 +59,11 @@ class _SueldoFormState extends State<SueldoForm> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          _buildAnimatedTextField(_sueldoBaseController, 'Sueldo base'),
+          _buildTextField(_sueldoBaseController, 'Sueldo base'),
           SizedBox(height: 15),
-          _buildAnimatedTextField(_horasNormalesController, 'Horas extras normales'),
+          _buildTextField(_horasNormalesController, 'Horas extras normales'),
           SizedBox(height: 15),
-          _buildAnimatedTextField(_horasNocturnasController, 'Horas extras nocturnas'),
+          _buildTextField(_horasNocturnasController, 'Horas extras nocturnas'),
           SizedBox(height: 25),
           MouseRegion(
             onEnter: (_) => setState(() => _hovering = true),
@@ -67,13 +75,13 @@ class _SueldoFormState extends State<SueldoForm> {
               child: ElevatedButton(
                 onPressed: _calcularSueldoSemanal,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: _hovering ? Colors.deepPurpleAccent : Colors.deepPurple,
+                  backgroundColor: _hovering ? Colors.deepPurple: Colors.deepPurple,
                   padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
                   elevation: _hovering ? 15 : 5,
-                  shadowColor: Colors.deepPurpleAccent,
+                  shadowColor: Color(0xFF2E0054),
                 ),
                 child: Text(
                   'Calcular Sueldo Semanal',
@@ -88,7 +96,7 @@ class _SueldoFormState extends State<SueldoForm> {
             duration: Duration(milliseconds: 500),
             child: Text(
               _resultado,
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.deepPurple),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black),
             ),
           ),
         ],
@@ -96,16 +104,16 @@ class _SueldoFormState extends State<SueldoForm> {
     );
   }
 
-  Widget _buildAnimatedTextField(TextEditingController controller, String label) {
+  Widget _buildTextField(TextEditingController controller, String label) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 300),
       padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       decoration: BoxDecoration(
-        color: Colors.grey[200],
+        color: Colors.white10,
         borderRadius: BorderRadius.circular(15),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.4),
+            color: Colors.black.withOpacity(0.1),
             blurRadius: 8,
             offset: Offset(0, 5),
           ),
@@ -115,10 +123,11 @@ class _SueldoFormState extends State<SueldoForm> {
         controller: controller,
         decoration: InputDecoration(
           labelText: label,
+          labelStyle: TextStyle(color: Colors.black),
           border: InputBorder.none,
         ),
         keyboardType: TextInputType.number,
-        style: TextStyle(fontSize: 18),
+        style: TextStyle(fontSize: 18, color: Colors.black),
       ),
     );
   }
