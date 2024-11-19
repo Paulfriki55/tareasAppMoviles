@@ -33,7 +33,7 @@ class _PaginaRegisterState extends State<PaginaRegister> {
 
       try {
         final response = await http.post(
-          Uri.parse('http://10.0.2.2/api_usuarios/register.php'),
+          Uri.parse('http://127.0.0.1/api_usuarios/register.php'),
           body: json.encode({
             'email': _emailController.text,
             'password': _passwordController.text,

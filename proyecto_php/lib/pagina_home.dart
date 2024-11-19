@@ -26,7 +26,7 @@ class _PaginaHomeState extends State<PaginaHome> {
     final token = Provider.of<AuthProvider>(context, listen: false).token;
     try {
       final response = await http.get(
-        Uri.parse('http://10.0.2.2/api_usuarios/user_crud.php'),
+        Uri.parse('http://127.0.0.1/api_usuarios/user_crud.php'),
         headers: {
           'Content-Type': 'application/json',
           'Authorization': 'Bearer $token',
@@ -51,7 +51,7 @@ class _PaginaHomeState extends State<PaginaHome> {
     final token = Provider.of<AuthProvider>(context, listen: false).token;
     try {
       final response = await http.put(
-        Uri.parse('http://10.0.2.2/api_usuarios/user_crud.php'),
+        Uri.parse('http://127.0.0.1/api_usuarios/user_crud.php'),
         body: json.encode(_userData),
         headers: {
           'Content-Type': 'application/json',

@@ -30,7 +30,7 @@ class _PaginaLoginState extends State<PaginaLogin> {
 
       try {
         final response = await http.post(
-          Uri.parse('http://10.0.2.2/api_usuarios/login.php'),
+          Uri.parse('http://127.0.0.1/api_usuarios/login.php'),
           body: json.encode({
             'email': _emailController.text,
             'password': _passwordController.text
